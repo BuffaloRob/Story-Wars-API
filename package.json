@@ -1,0 +1,19 @@
+{
+  "name": "story-wars-api",
+  "version": "1.0.0",
+  "description": "Story Wars",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BuffaloRob/Story-Wars-API.git"
+  },
+  "author": "Rob Peckham",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BuffaloRob/Story-Wars-API/issues"
+  },
+  "homepage": "https://github.com/BuffaloRob/Story-Wars-API#readme"
+}
