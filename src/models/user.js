@@ -1,7 +1,7 @@
 // models/user.js
-const { DataTypes } = require("sequelize");
+import { DataTypes } from "sequelize";
 
-module.exports = (sequelize) => {
+export default (sequelize) => {
   const User = sequelize.define("User", {
     id: {
       type: DataTypes.INTEGER,
