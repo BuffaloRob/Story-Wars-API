@@ -23,7 +23,7 @@ const sequelize = new Sequelize(
 );
 
 // Initialize models
-const User = require("./user")(sequelize);
+const User = require("./user").default(sequelize);
 
 // Define relationships if needed
 // For example, if you later add a UserProfile model:
