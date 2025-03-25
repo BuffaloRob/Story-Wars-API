@@ -1,12 +1,11 @@
-// app.js
-const express = require("express");
-const cors = require("cors");
-const helmet = require("helmet");
-const dotenv = require("dotenv");
-const { syncDatabase } = require("./models");
+import express, { json, urlencoded } from "express";
+import cors from "cors";
+import helmet from "helmet";
+import { config } from "dotenv";
+import { syncDatabase } from "./models";
 
 // Load environment variables
-dotenv.config();
+config();
 
 // Initialize Express app
 const app = express();
@@ -14,16 +13,16 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(helmet());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(json());
+app.use(urlencoded({ extended: true }));
 
 // Sync database models
 syncDatabase();
 
 // Routes
-const authRoutes = require("./routes/authRoutes");
-const adminRoutes = require("./routes/adminRoutes");
-const userRoutes = require("./routes/userRoutes");
+import authRoutes from "./routes/authRoutes";
+import adminRoutes from "./routes/adminRoutes";
+import userRoutes from "./routes/userRoutes";
 
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
