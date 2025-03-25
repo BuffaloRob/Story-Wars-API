@@ -1,4 +1,3 @@
-// controllers/authController.js
 import { hash, compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { User } from "../models";

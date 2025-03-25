@@ -1,4 +1,3 @@
-// models/user.js
 import { DataTypes } from "sequelize";
 
 export default (sequelize) => {
