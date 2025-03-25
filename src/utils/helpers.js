@@ -10,16 +10,11 @@ exports.generateInviteCode = () => {
 exports.seedCategories = async () => {
   const { Category } = require("../models");
   const categories = [
-    "Fantasy Adventure",
-    "Sci-Fi Exploration",
-    "Historical Mystery",
-    "Romantic Comedy",
-    "Supernatural Thriller",
-    "Dystopian Future",
-    "Urban Legend",
-    "Time Travel Paradox",
-    "Space Opera",
-    "Magical Realism",
+    "Halloween",
+    "Death",
+    "Romance",
+    "Holidays",
+    "Family",
   ];
 
   for (const categoryName of categories) {
