@@ -1,9 +1,7 @@
-// models/index.js
-const { Sequelize } = require("sequelize");
+import { Sequelize } from "sequelize";
 const dotenv = require("dotenv");
 
 dotenv.config();
-
 // Database connection configuration
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -22,13 +20,38 @@ const sequelize = new Sequelize(
   }
 );
 
-// Initialize models
-const User = require("./user").default(sequelize);
+// Import / Initialize models
+const User = require("./user")(sequelize);
+const Game = require("./game")(sequelize);
+const Category = require("./category")(sequelize);
+const Story = require("./story")(sequelize);
+const GamePlayer = require("./gamePlayer")(sequelize);
 
-// Define relationships if needed
-// For example, if you later add a UserProfile model:
-// User.hasOne(UserProfile);
-// UserProfile.belongsTo(User);
+// Define associations
+User.hasMany(Game, { foreignKey: "leaderId", as: "LeaderedGames" });
+Game.belongsTo(User, { foreignKey: "leaderId", as: "Leader" });
+
+// Many-to-Many relationship between Users and Games
+User.belongsToMany(Game, {
+  through: GamePlayer,
+  foreignKey: "userId",
+  otherKey: "gameId",
+});
+Game.belongsToMany(User, {
+  through: GamePlayer,
+  foreignKey: "gameId",
+  otherKey: "userId",
+});
+
+// Relationship with Stories
+User.hasMany(Story, { foreignKey: "userId" });
+Story.belongsTo(User, { foreignKey: "userId" });
+
+Game.hasMany(Story, { foreignKey: "gameId" });
+Story.belongsTo(Game, { foreignKey: "gameId" });
+
+Category.hasMany(Story, { foreignKey: "categoryId" });
+Story.belongsTo(Category, { foreignKey: "categoryId" });
 
 // Sync all models with database
 const syncDatabase = async () => {
@@ -40,8 +63,12 @@ const syncDatabase = async () => {
   }
 };
 
-module.exports = {
+export default {
   sequelize,
   User,
+  Game,
+  Category,
+  Story,
+  GamePlayer,
   syncDatabase,
 };
